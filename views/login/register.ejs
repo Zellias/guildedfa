@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuildedFa</title>
+    <meta name="author" content="GuildedFa">
+    <meta name="description" content="">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+</head>
+
+<body class="bg-white  h-screen"
+    style=" font-family: 'Lalezar', cursive; background-color: rgb(17 24 39); color: white;">
+
+    <div class="w-full flex flex-wrap">
+
+        <!-- Login Section -->
+        <div class="w-full md:w-1/2 flex flex-col">
+
+            <div class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
+                <a href="/"> <img class="rotate" src="/images/logo.png"
+                        style="width: 60px; height: 60px; animation: rotation 2s infinite linear;" alt="Logo"></a>
+            </div>
+
+            <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                <p class="text-center text-3xl">ثبت نام</p>
+                <form id="formreg" onsubmit="func()" action="/register"  method="post" class="flex flex-col pt-3 md:pt-8" >
+                    <div class="flex flex-col pt-4">
+                        <label for="username" class="text-lg">نام کاربری</label>
+                        <input type="text" name="username" id="username" placeholder="username" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div class="flex flex-col pt-4">
+                        <label for="email" class="text-lg">ایمیل</label>
+                        <input type="email" name="email" id="email" placeholder="your@email.com" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="flex flex-col pt-4">
+                        <label for="password" class="text-lg">رمز</label>
+                        <input type="password" name="password" id="password" placeholder="رمز" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div class="flex flex-col pt-4">
+                        <label for="password2" class="text-lg">تکرار رمز</label>
+                        <input type="password" name="password2" id="password2" placeholder="تکرار رمز" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px;" class="g-recaptcha" data-sitekey="6LfwVwIfAAAAAJUcqWUVj7R0NMZ5va6Ulea22FF5"></div>
+
+                    <p style="color:red; text-align: center;" id="error"></p>
+                    <input type="submit" 
+                        style="width: 80px; display: block; margin-left: auto; margin-right: auto; border-radius: 20px 20px;"
+                        value="ثبت نام" class="bg-indigo-500 text-white font-bold text-lg hover:bg-indigo-600 p-2 mt-8" >
+
+                </form>
+                <div class="text-center pt-12 pb-12">
+                    <p> قبلا حساب ساختی؟ <a href="login" class="underline font-semibold">به اکانتت وارد شو</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="w-1/2 shadow-2xl">
+            <img class="object-cover w-full h-screen hidden md:block" src="/images/bg-login.jpg">
+        </div>
+    </div>
+
+</body>
+<style>
+    .rotate {
+        animation: rotation 2s infinite linear;
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(359deg);
+        }
+    }
+</style>
+<script>
+
+
+
+async function func(){
+  
+        let pas1 = document.getElementById("password").value
+        let pas2 = document.getElementById("password2").value
+        let email = document.getElementById("email").value
+        let username = document.getElementById("username").value
+        let usedd = ""
+        let usedd2 = ""
+
+        let data = await fetch(`/api/v1/isused/email/${email}`)
+        .then(response => response.json())
+        .then(data => {
+            usedd = data.isUsed
+        }); 
+        let data2 = await fetch(`/api/v1/isused/username/${username}`)
+        .then(response => response.json())
+        .then(data => {
+            usedd2 = data.isUsed
+        }); 
+        if(pas1 != pas2){
+            document.getElementById('error').innerHTML = "پسورد ها برابر نیست"
+            return false;
+        }else{
+            document.getElementById('error').innerHTML = " ";
+        }
+        if(pas1.length <=8 || pas2.length <=8){
+            document.getElementById('error').innerHTML = "پسورد باید بیشتر از 8 کارکتر باشند"
+            return false;
+        }else{
+            document.getElementById('error').innerHTML = " ";
+        }
+        if(pas1.length >=16 || pas2.length >=16 ){
+            document.getElementById('error').innerHTML = "پسورد نباید بیشتر از 16 کارکتر باشد"
+            return false;
+        }else{
+            document.getElementById('error').innerHTML = " ";
+        }
+        if(pas1.includes(" ") || pas2.includes(" ")){
+            document.getElementById('error').innerHTML = "در پسورد نباید از فاصله استفاده شود"
+            return false;
+        }else{
+            document.getElementById('error').innerHTML = " ";
+        }
+        if(await usedd){
+            document.getElementById('error').innerHTML = "این ایمیل قبلا استفاده شده است";
+           return false;
+        }else{
+            document.getElementById('error').innerHTML = " ";
+        }
+        if(await usedd2){
+            document.getElementById('error').innerHTML = "این نام کاربری قبلا استفاده شده است";
+           return false;
+        }else{
+            document.getElementById('error').innerHTML = " ";
+        }
+     }
+
+</script>
+</html>

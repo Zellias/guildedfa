@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuildedFa</title>
+    <meta name="author" content="GuildedFa">
+    <meta name="description" content="">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+</head>
+
+<body class="bg-white  h-screen"
+    style=" font-family: 'Lalezar', cursive; background-color: rgb(17 24 39); color: white;">
+
+    <div class="w-full flex flex-wrap">
+
+        <!-- Login Section -->
+        <div class="w-full md:w-1/2 flex flex-col">
+
+            <div class="flex justify-center md:justify-start pt-12 md:pl-12 md:-mb-24">
+                <a href="/"> <img class="rotate" src="/images/logo.png"
+                        style="width: 60px; height: 60px; animation: rotation 2s infinite linear;" alt="Logo"></a>
+            </div>
+
+            <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                <p class="text-center text-3xl">ورود به سایت</p>
+                <form action="/login" method="post" class="flex flex-col pt-3 md:pt-8">
+                    <div class="flex flex-col pt-4">
+                        <label for="username" class="text-lg">نام کاربری</label>
+                        <input required type="text" name="username" id="username" placeholder="Username"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+
+                    <div class="flex flex-col pt-4">
+                        <label for="password" class="text-lg">رمز</label>
+                        <input required type="password" name="password" id="password" placeholder="رمز"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                   <div style="display: block; margin-left: auto; margin-right: auto; margin-top: 5px;" class="g-recaptcha" data-sitekey="6LfwVwIfAAAAAJUcqWUVj7R0NMZ5va6Ulea22FF5"></div>
+
+                    <% if(failureFlash){ %> 
+                    <p style="color:rgb(253, 5, 5); text-align: center; font-size: 10px;" id="error"><%= failureFlash %> </p>
+                        <% } %> 
+                    <input type="submit"
+                        style="width: 80px; display: block; margin-left: auto; margin-right: auto; border-radius: 20px 20px;"
+                        value="ورود" class="bg-indigo-500 text-white font-bold text-lg hover:bg-indigo-600 p-2 mt-8">
+
+                </form>
+                <div class="text-center pt-12 pb-12">
+                    <p> ثبت نام نکردی؟ <a href="register" class="underline font-semibold">الان ثبت نام کن</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Image Section -->
+        <div class="w-1/2 shadow-2xl">
+            <img class="object-cover w-full h-screen hidden md:block" src="/images/bg-login.jpg">
+        </div>
+    </div>
+
+</body>
+<style>
+    .rotate {
+        animation: rotation 2s infinite linear;
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(359deg);
+        }
+    }
+</style>
+
+<script>
+
+</script>
+
+</html>

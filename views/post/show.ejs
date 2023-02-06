@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/output.css' />
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/6d201b1005.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+
+<body class="bg-gray-900">
+  <!--Navbar ================================================================================-->
+  <header style="font-family: 'Lalezar', cursive;">
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+      <div class="container flex flex-wrap justify-between items-center mx-auto">
+        <a href="/" class="flex items-center">
+          <img src="/images/logo.png" class="mr-3 h-6 sm:h-10" alt="GuildedFa" />
+          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">گیلددفا</span>
+        </a>
+        <div class="flex items-center md:order-2">
+          <button type="button"
+            class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8 rounded-full" src="images/user.png" alt="user photo">
+          </button>
+          <!-- Dropdown menu -->
+         
+      </div>
+
+    </nav>
+  </header>
+  <!--=======================================================================================--> 
+
+  <section style="font-family: 'Lalezar', cursive; color: white;">
+    <div  style="box-sizing: border-box;width: auto;height: auto;padding: 30px; background-color: rgb(75 85 99); margin: auto; margin-top: 4em; width: 70%; height: auto; border-radius: 20px 20px 20px 20px; padding: 5%; ">
+        <h1 style="text-align: center; font-size: 3em;"><%- article.title%></h1>
+        <p style="text-align: center; opacity: 60%;"><%= article.createdAt.toLocaleDateString() %> - <%= article.author %></p>
+       <div dir="rtl">
+        <%- article.sanitizedHtml %>   
+       </div>
+        <% if(user){ %>
+            <% if(user.username == article.author){%>
+              <div style="">
+              <button type="button" onclick="goToEdit()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">ویرایش</button>
+              <form action="/posts/delete/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+              <%}%>
+          <%}%>
+    </div> 
+
+   </section>
+
+        
+
+
+
+  <!--=======================================================================================-->
+</body>
+
+<style>
+  .rotate {
+    animation: rotation 2s infinite linear;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  h1{
+      font-size: 20px;
+  }
+  h2{
+      font-size: 16px;
+  }
+</style>
+<script>
+  function clicked() {
+    document.location.replace('/posts/add')
+  }
+  function goToEdit(){
+    document.location.replace('/posts/edit/<%- article.id %>')
+  }
+  function goToDelete(){
+    document.location.replace('/posts/delete/<%- article.id %>')
+  }
+</script>
+</html>

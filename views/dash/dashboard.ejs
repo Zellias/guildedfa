@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/output.css' />
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/6d201b1005.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+
+<body class="bg-gray-900">
+  <!--Navbar ================================================================================-->
+  <header style="font-family: 'Lalezar', cursive;">
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+      <div class="container flex flex-wrap justify-between items-center mx-auto">
+        <a href="/" class="flex items-center">
+          <img src="/images/logo.png" class="mr-3 h-6 sm:h-10" alt="GuildedFa" />
+          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">گیلددفا</span>
+        </a>
+        <div class="flex items-center md:order-2">
+          <button type="button"
+            class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8" src="/images/user.png" width="20px" height="20px" alt="user photo">
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+            id="dropdown">
+            <div class="py-3 px-4">
+              <span class="block text-sm text-gray-900 dark:text-white">
+                <%- user.username %>
+              </span>
+              <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
+                <%- user.email %>
+              </span>
+            </div>
+           
+          </div>
+         
+        </div>
+        <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
+          <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+
+          </ul>
+        </div>
+      </div>
+
+    </nav>
+  </header>
+  <section style="font-family: 'Lalezar', cursive;">
+    
+    <div
+      style="box-sizing: border-box;width: auto;height: auto;padding: 30px; background-color: rgb(75 85 99); margin: auto; margin-top: 4em; width: 70%; height: 350px; border-radius: 20px 20px 0px 0px; padding: 5%; ">
+      
+      <div class="grid grid-cols-4 gap-4">
+
+        <% if(isHavePfp){ %> 
+          <div><img src="/images/users/avatars/<%-user.id%>.png" class="mr-3" style="width: 135px; height: 135px;" alt="GuildedFa" /></div>
+          
+          <% }else{ %>
+            
+            <div><img src="/images/user.png" class="mr-3" style="width: 135px; height: 135px;" alt="GuildedFa" /></div>
+          <% } %> 
+        <div style=" margin-top:2em ; color: white;">
+          <h1 style="font-size: 27px;">
+            <%- user.username %>
+          </h1>
+          <h3 style="font-size: 14px;">
+            <%- user.email %>
+          </h3>
+
+        </div>
+      </div>
+      <% if(notif) { %>
+        <div class="px-4 py-4 text-yellow-800 bg-yellow-300 rounded" role="alert">
+          <h1 style="text-align: center; color: limegreen; font-size: 15px;"> <%- notif %> </h1>
+       </div>
+      <% } %>
+      <h1 style="text-align: center; color: white; font-size: 25px;">در باره من</h1>
+      <hr
+        style="opacity: 40%; margin-top: 20px; width: 120px; display: block; margin-left: auto; margin-right: auto; margin-top: -1px;">
+<% if(!user.bio){%>
+      <p style="text-align: center; color: rgb(179, 179, 179);"> شما هیچ "درباره من" ثبت نکردید</p>
+ <%}else{%>
+  <p style="text-align: center; color: rgb(179, 179, 179);"><%-user.bio%></p>
+  <% }%>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-4" style="box-sizing: border-box;width: auto;padding: 30px; background-color: rgb(75 85 99); margin: auto; margin-top: 1em; width: 70%; height: 90px; border-radius: 0px 0px 20px 20px; padding: 5%; ">
+
+      <div class="inline-flex rounded-md shadow-sm" role="group" style="display: block; margin-left: auto; margin-right: auto; margin-top:-1em;">
+        <button type="button" id="myBtn" class="py-2 px-4 text-sm  text-gray-900 bg-transparent rounded-l-lg border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          تکمیل پروفایل
+        </button>
+
+        <button type="button" onclick="clicked()" class="py-2 px-4 text-sm  text-gray-900 bg-transparent rounded-r-md border border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          ثبت پست
+        </button>
+      </div>
+    
+
+
+      <!-- The Modal -->
+
+      <div id="myModal" class="modal">
+      
+        <!-- Modal content -->
+        <div class="modal-content" style="border-radius: 5%; width: 30%; ">
+          <form action="/users/<%-user.username%>" method="post"enctype="multipart/form-data"  class="flex flex-col pt-3 md:pt-8">
+            <div class="flex flex-col pt-4">
+                <label for="aboutme" class="text-lg">درباره من</label>
+                <input  type="text" name="aboutme" id="aboutme" placeholder="متنی کوتاه که توصیف گر خودتان باشد"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                    <label for="avUoload" class="text-lg">تصویر پروفایل</label>
+                    <input  type="file" name="avUoload" id="avUoload" accept="image/png"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+           
+                  </div>
+
+            <input id="btnclosea"  type="submit"
+                style="width: 80px; display: block; margin-left: auto; margin-right: auto; border-radius: 20px 20px; margin-top: 10px;"
+                value="ثبت" class="bg-indigo-500 text-white font-bold text-lg hover:bg-indigo-600 p-2 mt-8">
+
+        </form>
+        </div>
+      
+      </div>
+        
+
+
+
+    </div>
+
+  </section>
+  <!--=======================================================================================-->
+</body>
+
+<style>
+  .rotate {
+    animation: rotation 2s infinite linear;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+<script>
+  function clicked() {
+    document.location.replace('/posts/add')
+  }
+  var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("btnclosea");
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 400);
+  
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+</html>
