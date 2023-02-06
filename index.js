@@ -1,5 +1,4 @@
- '
- var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser');
 var express = require('express');
 var app = express();
 var bodyparser = require('body-parser');
