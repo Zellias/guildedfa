@@ -8,7 +8,7 @@ var flash = require('connect-flash')
 const methodOverride = require('method-override')
 const LocalStrategy = require("passport-local");
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb+srv://admin:admin@cluster0.d1ccazj.mongodb.net/test').then(connected => {
+mongoose.connect('XD').then(connected => {
   console.log('database connected')
 }).catch(err => {
   console.log('cant connect to the database')
