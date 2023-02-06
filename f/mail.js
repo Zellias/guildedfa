@@ -6,8 +6,8 @@ function send(email,verifyCode) {
     let mailTransporter = nodemailer.createTransport({
         service: 'outlook',
         auth: {
-            user: 'rangani778@outlook.com',
-            pass: 'hoseiner1234'
+            user: 'Haha',
+            pass: 'Haha'
         }
     });
     
